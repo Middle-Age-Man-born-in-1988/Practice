@@ -1,0 +1,27 @@
+
+function inheritPrototype(SubType,SuperType){  //两个参数均为构造函数，一个子类、一个超类
+  var prototype=object(SuperType.prototype);  // 将超类的原型对象赋值给变量
+  prototype.constructor=subType;  //指定该对象的constructor属性
+  subType.prototype=prototype;  //将该对象指定给子类的原型
+}
+
+function SuperType(name){
+  this.name = name;
+  this.color = ["red","blue","yellow"];
+}
+
+SuperType.prototype.sayName = function(){
+  alert(this.name);
+};
+
+function SubType(name,age){
+  SuperType.call(this,name);
+  this.age = age;
+}
+
+inheritPrototype(SubType,SuperType);
+
+subType.prototype.sayAge = function(){
+  alert(this.age);
+};
+比组合式继承好的地方在于少调用一次超类,能够不在子类的原型上创建超类构造函数中的属性。
